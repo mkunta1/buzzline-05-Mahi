@@ -344,6 +344,10 @@ See the [LICENSE](LICENSE.txt) file for more.
 - Ruff by Astral Software (Linter + Formatter)
 - **SQLite Viewer by Florian Klampfer**
 
+## Consumer file 
+-Reads data from a local file (patient_feedback.jsonl), process each line and performs sentimental analysis on the feedback provided. The consumer stores the processed information into SQLite database. 
+
+
 ## Producer Generate Feedback messages
 {"patient_id": "12345", "feedback": "The treatment was great!", "timestamp": "2025-10-04 02:00:00"}
 {"patient_id": "67890", "feedback": "I still have some pain.", "timestamp": "2025-10-04 02:05:00"}
