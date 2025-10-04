@@ -153,6 +153,25 @@ def _delete_topic_if_exists(admin: KafkaAdminClient, topic_name: str) -> None:
     except Exception as e:
         logger.warning(f"Ignoring topic deletion issue for '{topic_name}': {e}")
 
+def is_topic_available(broker_address, topic_name) -> bool:
+    """
+    Check if a given Kafka topic exists on the specified broker.
+
+    Args:
+        broker_address (str): Kafka broker address, e.g., "localhost:9092"
+        topic_name (str): Kafka topic name to check.
+
+    Returns:
+        bool: True if topic exists, False otherwise.
+    """
+    try:
+        admin_client = KafkaAdminClient(bootstrap_servers=broker_address)
+        exists = _topic_exists(admin_client, topic_name)
+        admin_client.close()
+        return exists
+    except Exception as e:
+        logger.error(f"Error checking topic availability: {e}")
+        return False
 
 def create_kafka_topic(topic_name, group_id=None) -> None:
     """
